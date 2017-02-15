@@ -7,4 +7,4 @@ This is simple OpenGL 3D Graphic Engine&#9426; with graphic/game demos&#9426; ma
 * [GLFW](http://www.glfw.org/)
 * [Soil](http://www.lonesock.net/soil.html)
 
-**Special thanks to creator of website [Learn OpenGL](https://learnopengl.com/) to make everything possible.**
+**Special thanks to creator of the website [Learn OpenGL](https://learnopengl.com/) to make everything possible.**
