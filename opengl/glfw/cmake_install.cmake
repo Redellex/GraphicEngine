@@ -32,43 +32,55 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/sysop/Snake3D/opengl/glfw/include/GLFW" FILES_MATCHING REGEX "/glfw3\\.h$" REGEX "/glfw3native\\.h$")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3" TYPE FILE FILES
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3" TYPE FILE FILES
     "/home/sysop/Snake3D/opengl/glfw/src/glfw3Config.cmake"
     "/home/sysop/Snake3D/opengl/glfw/src/glfw3ConfigVersion.cmake"
     )
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3/glfw3Targets.cmake")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3/glfw3Targets.cmake")
     file(DIFFERENT EXPORT_FILE_CHANGED FILES
-         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3/glfw3Targets.cmake"
-         "/home/sysop/Snake3D/opengl/glfw/CMakeFiles/Export/lib/cmake/glfw3/glfw3Targets.cmake")
+         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3/glfw3Targets.cmake"
+         "/home/sysop/Snake3D/opengl/glfw/CMakeFiles/Export/liblib/cmake/glfw3/glfw3Targets.cmake")
     if(EXPORT_FILE_CHANGED)
-      file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3/glfw3Targets-*.cmake")
+      file(GLOB OLD_CONFIG_FILES "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3/glfw3Targets-*.cmake")
       if(OLD_CONFIG_FILES)
-        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3/glfw3Targets.cmake\" will be replaced.  Removing files [${OLD_CONFIG_FILES}].")
+        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3/glfw3Targets.cmake\" will be replaced.  Removing files [${OLD_CONFIG_FILES}].")
         file(REMOVE ${OLD_CONFIG_FILES})
       endif()
     endif()
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3" TYPE FILE FILES "/home/sysop/Snake3D/opengl/glfw/CMakeFiles/Export/lib/cmake/glfw3/glfw3Targets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3" TYPE FILE FILES "/home/sysop/Snake3D/opengl/glfw/CMakeFiles/Export/liblib/cmake/glfw3/glfw3Targets.cmake")
   if("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^()$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/glfw3" TYPE FILE FILES "/home/sysop/Snake3D/opengl/glfw/CMakeFiles/Export/lib/cmake/glfw3/glfw3Targets-noconfig.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/liblib/cmake/glfw3" TYPE FILE FILES "/home/sysop/Snake3D/opengl/glfw/CMakeFiles/Export/liblib/cmake/glfw3/glfw3Targets-noconfig.cmake")
   endif()
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sysop/Snake3D/opengl/glfw/src/glfw3.pc")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/liblib/pkgconfig" TYPE FILE FILES "/home/sysop/Snake3D/opengl/glfw/src/glfw3.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/sysop/Snake3D/opengl/glfw/src/cmake_install.cmake")
+  include("/home/sysop/Snake3D/opengl/glfw/examples/cmake_install.cmake")
+  include("/home/sysop/Snake3D/opengl/glfw/tests/cmake_install.cmake")
 
 endif()
 
+if(CMAKE_INSTALL_COMPONENT)
+  set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
+else()
+  set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
+endif()
+
+string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
+       "${CMAKE_INSTALL_MANIFEST_FILES}")
+file(WRITE "/home/sysop/Snake3D/opengl/glfw/${CMAKE_INSTALL_MANIFEST}"
+     "${CMAKE_INSTALL_MANIFEST_CONTENT}")

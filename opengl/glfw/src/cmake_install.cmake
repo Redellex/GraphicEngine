@@ -32,7 +32,35 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/sysop/Snake3D/opengl/glfw/src/libglfw3.a")
+if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  foreach(file
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/libglfw.so.3.2"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/libglfw.so.3"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/libglfw.so"
+      )
+    if(EXISTS "${file}" AND
+       NOT IS_SYMLINK "${file}")
+      file(RPATH_CHECK
+           FILE "${file}"
+           RPATH "")
+    endif()
+  endforeach()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/liblib" TYPE SHARED_LIBRARY FILES
+    "/home/sysop/Snake3D/opengl/glfw/src/libglfw.so.3.2"
+    "/home/sysop/Snake3D/opengl/glfw/src/libglfw.so.3"
+    "/home/sysop/Snake3D/opengl/glfw/src/libglfw.so"
+    )
+  foreach(file
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/libglfw.so.3.2"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/libglfw.so.3"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/liblib/libglfw.so"
+      )
+    if(EXISTS "${file}" AND
+       NOT IS_SYMLINK "${file}")
+      if(CMAKE_INSTALL_DO_STRIP)
+        execute_process(COMMAND "/usr/bin/strip" "${file}")
+      endif()
+    endif()
+  endforeach()
 endif()
 

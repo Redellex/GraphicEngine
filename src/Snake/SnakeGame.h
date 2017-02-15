@@ -23,13 +23,13 @@
 class SnakeGame {
 
     std::vector<glm::vec3> cubeBoardPosition;
-    glm::vec3 foodPosition = {0, 0, -6.0f};
+    glm::vec3 foodPosition = {0, 0, -19.0f};
     glm::vec3 OldFoodPosition;
     GLboolean isFood = false;
 
     //Player position stuff
     glm::vec2 player_vector;
-    glm::vec3 playerPosition = {0, 0, -6.0f};
+    glm::vec3 playerPosition = {0, 0, -19.0f};
     std::vector<glm::vec3> tailPosition;
     GLint tailCount = 0;
 

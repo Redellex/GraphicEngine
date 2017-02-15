@@ -16,7 +16,7 @@ int main(){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Snake3D demo v1.0 by Pawel Sobocinski", 0, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Snake3D demo v1.0 by Pawel Sobocinski", glfwGetPrimaryMonitor(), nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -35,9 +35,7 @@ int main(){
 
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, WIDTH, HEIGHT);
-
     SnakeGame game(window);
-
 
     glEnable(GL_DEPTH_TEST);
 

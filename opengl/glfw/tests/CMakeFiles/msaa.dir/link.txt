@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/msaa.dir/msaa.c.o CMakeFiles/msaa.dir/__/deps/getopt.c.o CMakeFiles/msaa.dir/__/deps/glad.c.o  -o msaa -Wl,-rpath,/home/sysop/Snake3D/opengl/glfw/src -rdynamic ../src/libglfw.so.3.2 -lm 

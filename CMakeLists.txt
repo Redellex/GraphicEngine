@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project(Snake3D C CXX)
+project(GraphicEngine C CXX)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 #########################################################
@@ -7,10 +7,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 #########################################################
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 include_directories(./include
-                    ./opengl/include
+                    ./opengl/glew/include
+                    ./opengl/glm/include
+                    ./opengl/glfw/include
                     ./src/Snake)
 
-set(NEW_SNAKE_SOURCE_FILES
+set(SNAKE_SOURCE_FILES
         src/Snake/SnakeMain.cpp
         src/Snake/SnakeGame.cpp
         src/shader.cpp
@@ -33,12 +35,12 @@ endif(NOT OPENGL_FOUND)
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-add_subdirectory(opengl/glfw)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/opengl/glfw)
 
 #########################################################
 # GLEW
 #########################################################
-link_directories("opengl/glew/lib")
+link_directories("${CMAKE_CURRENT_SOURCE_DIR}/opengl/glew/lib")
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 link_directories(${GLEW_LIBRARY_DIRS})
@@ -50,13 +52,12 @@ endif(NOT GLEW_FOUND)
 #########################################################
 # SOIL
 #########################################################
-set (LIB_SOIL libSOIL.a )
-link_directories( ~/Snake3D/opengl/soil/lib)
-
+set (LIB_SOIL libSOIL.a)
+link_directories("${CMAKE_CURRENT_SOURCE_DIR}/opengl/soil/lib")
 
 #########################################################
 # COMPILE
 #########################################################
-add_executable(TestSnake3D ${NEW_SNAKE_SOURCE_FILES})
+add_executable(DemoSnake3D ${SNAKE_SOURCE_FILES})
 
-target_link_libraries(TestSnake3D ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${LIB_SOIL} glfw)
+target_link_libraries(DemoSnake3D ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${LIB_SOIL} glfw)

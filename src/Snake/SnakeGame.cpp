@@ -123,7 +123,7 @@ void SnakeGame::GenerateBoardPosition()
     {
         for(float j =0; j< 14; j++)
         {
-            cubeBoardPosition.push_back(glm::vec3( i-7,  j-7,  -7.0f));
+            cubeBoardPosition.push_back(glm::vec3( i-7,  j-7,  -20.0f));
         }
     }
 }
